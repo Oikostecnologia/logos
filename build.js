@@ -1,5 +1,5 @@
 const fs = require('fs');
-const BASE = 'https://oikostecnologia.github.io/logos/';
+const BASE = 'https://raw.githubusercontent.com/Oikostecnologia/logos/master/';
 const rows = fs.readFileSync('names.tsv', 'utf8').trim().split('\n').map(l => l.split('\t'));
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const fileFor = slug => ['png','jpg','webp'].map(e => slug+'.'+e).find(f => fs.existsSync(f)) || null;

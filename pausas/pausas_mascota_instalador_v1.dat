@@ -33,7 +33,7 @@ if exist "%CARPETA%\pausas_activas_aviso.bat" del /f /q "%CARPETA%\pausas_activa
 if exist "%CARPETA%\pausas_activas_tarea.xml" del /f /q "%CARPETA%\pausas_activas_tarea.xml"
 
 REM --- 2) Requisitos: .NET 4.6.2+ y WebView2 ---
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$r=(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full' -ErrorAction SilentlyContinue).Release; $k='SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}'; $w=(Get-ItemProperty \"HKLM:\SOFTWARE\WOW6432Node\$k\",\"HKLM:\$k\" -ErrorAction SilentlyContinue | Where-Object { $_.pv -and $_.pv -ne '0.0.0.0' }); if ($r -ge 394802 -and $w) { exit 0 } else { exit 4 }"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$r=(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full' -ErrorAction SilentlyContinue).Release; $k='Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}'; $w=(Get-ItemProperty \"HKLM:\SOFTWARE\WOW6432Node\$k\",\"HKLM:\SOFTWARE\$k\" -ErrorAction SilentlyContinue | Where-Object { $_.pv -and $_.pv -ne '0.0.0.0' }); if ($r -ge 394802 -and $w) { exit 0 } else { exit 4 }"
 if errorlevel 1 (
   >>"%LOG%" echo Falta .NET 4.6.2 o WebView2
   exit /b 4
